@@ -1,24 +1,11 @@
-var app = require('express')();
-var server = require('http').Server(app);
-var io = require('socket.io')(server),
-    util = require('util'),
-    bodyParser = require('body-parser');
-var port = process.env.port || 80;
-server.listen(port);
-console.log("listening on port: " + port);
+// Server 2
+var io = require("socket.io").listen(8100);
+io.sockets.on("connection",function(socket){
+    // Display a connected message
+    console.log("Server-Client Connected!");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
-
-app.post("/addNewTagToService", function (req, res) {
-    // look for parameters from form input
-    var data = {
-        ID: req.body.ID,
-    };
-    console.log("sending request to interperet new data");
-    // send the message to console app
-    io.emit("test",data);
-    res.send("OK");
+    // When we receive a message...
+    socket.on("message",function(data){
+        // We got a message... I dunno what we should do with this...
+    });
 });

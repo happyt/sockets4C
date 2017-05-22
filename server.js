@@ -1,4 +1,4 @@
-var io = require('socket.io')(80);
+var io = require('socket.io')(8081);
 
 var myVar = setInterval(myTimer, 1000);
 
