@@ -1,4 +1,6 @@
 // Client
+var config = require(`./config.js`);
+
 var io = require("socket.io")
 var socket = io('http://localhost');
 socket.on('connect', function(){
