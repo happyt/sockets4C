@@ -1,6 +1,8 @@
 var config = require(`./config.js`);
 var port = config.gemPort;
-var io = require('socket.io')(port);
+var io = require("socket.io").listen(port); // This is the Server for the GUI
+
+// v2.0   var io = require('socket.io')(port);
 console.log("Gem test listener on port: " + port);
 
 io.sockets.on("connection",function(socket){
@@ -12,6 +14,8 @@ io.sockets.on("connection",function(socket){
         // We got a message... I dunno what we should do with this...
         console.log("message: " + data);
     });
+
+    socket.send('change', data, 3503, 1);
 });
 
 var myVar = setInterval(myTimer, 5000);
@@ -24,6 +28,7 @@ function myTimer() {
         bodyB: 23,
         bodyC: "and so on"
     }
-    io.emit('change', data, 3503, 1);
-//    console.log(".")
+//   io.emit('change', data, 3503, 1);
+    io.send('change', data);
+    console.log(".")
 }

@@ -1,6 +1,8 @@
 var config = require(`./config.js`);
 var port = config.bluePort;
-var io = require('socket.io')(port);
+
+var sock = require('socket.io');
+
 console.log("Blue test listener on port: " + port);
 
 io.sockets.on("connection",function(socket){

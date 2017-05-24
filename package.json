@@ -4,11 +4,8 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "express": "^4.15.3",
-    "node-tweet-stream": "^2.0.1",
-    "socket.io": "^2.0.1",
-    "socket.io-client": "^2.0.1"
+    "socket.io": "^0.9.16",
+    "socket.io-client": "^0.9.16"
   },
   "devDependencies": {},
   "scripts": {

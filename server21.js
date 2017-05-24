@@ -1,16 +1,21 @@
 // Server 1
 var config = require(`./config.js`);
 var port = config.myPort;
-var io = require("socket.io").listen(port); // This is the Server for SERVER 1
+var io = require("socket.io").listen(port); // This is the Server for the GUI
 console.log("Listening on " + port)
 
 var fs = require("fs");
 var logPath = config.logFile;
 console.log("writing to " + logPath)
 
-var gem_server = require("socket.io-client")(config.gemUrl); // This is a client connecting to gem 
+console.log("gem url " + config.gemUrl)         // connection to gem
+r = gemio.connect('http://uipm.gem-technology.com:3000/', { reconnection: true});
+
+var gem_server = require("socket.io-client")('http://uipm.gem-technology.com:3000/'); // This is a client connecting to gem 
+
 var event_id = 3503;
 var start_order = 1;
+
 
 var blue_server = require("socket.io-client")(config.blueUrl); // This is a client connecting to blue 
 blue_server.on("connect", function () {
@@ -86,7 +91,7 @@ gem_server.on("connect", function () {
     gem_server.on('shooting', function (data) {
         var parsed = JSON.parse(data);
         console.log(parsed);
-        if (parseInt(eventId) == parsed.event) {
+        if (eventId == parsed.event) {
             if (parsed.isRelay)
                 parseSocketDataRelay(parsed.data);
             else
