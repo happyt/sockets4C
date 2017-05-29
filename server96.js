@@ -14,9 +14,9 @@ var gem_server = gemio.connect('http://uipm.gem-technology.com:3000/', { reconne
 
 // var gem_server = require("socket.io-client")('http://uipm.gem-technology.com:3000/'); // This is a client connecting to gem 
 
-var event_id = 3503;
+var event_id = 3603;
 var start_order = 1;
-
+var messageCount = 0;
 
 // var blue_server = require("socket.io-client")(config.blueUrl); // This is a client connecting to blue 
 // blue_server.on("connect", function () {
@@ -24,8 +24,8 @@ var start_order = 1;
 // });
 
 
-function changeData(data) {
-     console.log("blue command: " + JSON.stringify(data));
+function parseChangeData(data) {
+ //   console.log("blue command: " + JSON.stringify(data));
     logData(data);
  //   blue_server.emit('command', { my: 'data' }); 
     //         console.log("change invoked");
@@ -55,9 +55,56 @@ function parseSocketData(data) {
 
 }
 
+var tempData = [{
+    "RunningResultId":12319,
+    "Hits":1,
+    "Misses":1,
+    "NumberOfShots":2,
+    "Time":50000,
+    "CurrentRound":"27",
+    "PositionInCurrentRound":7,
+    "Shooting":[0,1],
+    "IsTimedOut":true,
+    "IsShooting":true,
+    "AthleteId": 10842
+},{
+    "RunningResultId":12318,
+    "Hits":5,
+    "Misses":0,
+    "NumberOfShots":5,
+    "Time":10430,
+    "CurrentRound":"10",
+    "PositionInCurrentRound":3,
+    "Shooting":[1,1,1,1,1],
+    "IsTimedOut":false,
+    "IsShooting":true,
+    "AthleteId":6161
+}];
+
+logData(tempData);
+
 function logData(data) {
     // We received a message
-    console.log("data = " + JSON.stringify(data));
+//    console.log("data = " + JSON.stringify(data));
+    var posn = 0;
+    var suffix = "th";
+    messageCount++;
+    console.log("messages: " + messageCount + " ,  " + data.length);
+    if (data.length !== undefined) {
+    data.forEach(function (entry) {
+        if (entry.IsShooting) {
+            posn = entry.PositionInCurrentRound;
+            suffix = "th";
+            if (posn === 0) suffix = "?"; 
+            if ((posn % 10) === 1 && posn !== 11) suffix = "st"; 
+            if ((posn % 10) === 2 && posn !== 12) suffix = "nd"; 
+            if ((posn % 10) === 3 && posn !== 13) suffix = "rd"; 
+            console.log(`${entry.AthleteId}: ${entry.PositionInCurrentRound}${suffix},  ${entry.Hits},${entry.Misses},${entry.NumberOfShots}, ${entry.Shooting}`);
+        }
+    
+        });
+    }
+
     var logLine = Date.now() + ", " + JSON.stringify(data)
 
     fs.appendFile(logPath, logLine + "\n", function (error) {
@@ -69,40 +116,40 @@ function logData(data) {
     });
 }
 
-gem_server.on("connection", function () {
-    if (config.sport === "riding") {
-        gem_server.emit('riding-connected', '3503', '1');  // neccessary ??
-        console.log('Connected: 3503 + 1');
-    }
+gem_server.on("connect", function () {
+//    if (config.sport === "riding") {
+//        gem_server.emit('riding-connected', '3503', '1');  // neccessary ??
+//        console.log('Connected riding:');
+//    }
 
     console.log("Connected to gem... ");
 
     gem_server.on('change', function (data, event_id_update, start_order_update) {
-        console.log("event_id_update " + event_id_update + "; start_order_update " + start_order_update);
-        if (event_id_update == event_id && start_order_update == start_order) {
-            changeData(data);
-        }
+        console.log("change - event_id_update " + event_id_update + "; start_order_update " + start_order_update);
+   //     if (event_id_update == event_id && start_order_update == start_order) {
+            parseChangeData(data);
+  //      }
     });
 
     gem_server.on('switch', function (event_id_switch, start_order_switch) {
         console.log("switch - " + event_id_switch + ", " + start_order_switch);
+        event_id = event_id_switch;
         //        window.location.href = "http://gem-..riding-results"  + "/" + event_id_switch + "/" + start_order_switch;
     });
 
     gem_server.on('shooting', function (data) {
         var parsed = JSON.parse(data);
-        console.log(parsed);
-        if (eventId == parsed.event) {
+        console.log(`shooting: ${parsed.event} relay? ${parsed.isRelay}`);
+ //       if (event_id === parsed.event) {
             if (parsed.isRelay)
                 parseSocketDataRelay(parsed.data);
             else
                 parseSocketData(parsed.data);
-        }
+ //       }
     });
-
 });
 
-io.sockets.on("connection", function (socket) {
+io.sockets.on("connect", function (socket) {
     // Display a connected message
     console.log("Client connected!");
 

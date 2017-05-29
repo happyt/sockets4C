@@ -5,7 +5,7 @@ var io = require("socket.io").listen(port); // This is the Server for the GUI
 // v2.0   var io = require('socket.io')(port);
 console.log("Gem test listener on port: " + port);
 
-io.sockets.on("connection",function(socket){
+io.sockets.on("connect",function(socket){
     // Display a connected message
     console.log("client Connected!");
 
