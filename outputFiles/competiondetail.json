@@ -1,0 +1,280 @@
+{
+    "CompetitionId": 1175,
+    "Name": "UIPM World Cup III",
+    "Logo": "http:\/\/uipm-cms.gem-technology.com\/assets\/defaults\/uipm-logo.png",
+    "CountryIOC": "HUN",
+    "City": "Kecskem\u00e9t",
+    "StartDate": "03-05-2017",
+    "EndDate": "08-05-2017",
+    "Format": "modern pentathlon",
+    "Category": "World Cup Event",
+    "AgeCategory": "Senior",
+    "AgeGroup": "Seniors",
+    "AgeGroupInterval": "22 and over",
+    "Events": [
+        {
+            "EventId": 3564,
+            "EventName": "Women TM",
+            "EventDate": "03-05-2017 20:00",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3565,
+            "EventName": "Fencing Women-A ",
+            "EventDate": "04-05-2017 09:00",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3563,
+            "EventName": "Jumping Test",
+            "EventDate": "04-05-2017 10:00",
+            "AgeGroup": null,
+            "Type": "Riding",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3568,
+            "EventName": "Swimming Women-B ",
+            "EventDate": "04-05-2017 10:30",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3569,
+            "EventName": "Fencing Women-B",
+            "EventDate": "04-05-2017 12:00",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3566,
+            "EventName": "Swimming Women-A ",
+            "EventDate": "04-05-2017 13:00",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3567,
+            "EventName": "LR Women-A ",
+            "EventDate": "04-05-2017 16:45",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3570,
+            "EventName": "LR Women-B",
+            "EventDate": "04-05-2017 17:45",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3572,
+            "EventName": "Men Qualification- TM",
+            "EventDate": "04-05-2017 20:30",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3573,
+            "EventName": "Fencing Men-A",
+            "EventDate": "05-05-2017 09:00",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3576,
+            "EventName": "Swimming Men-B",
+            "EventDate": "05-05-2017 10:30",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3579,
+            "EventName": "Swimming Men-C",
+            "EventDate": "05-05-2017 11:45",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3577,
+            "EventName": "Fencing Men-B",
+            "EventDate": "05-05-2017 12:00",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3574,
+            "EventName": "Swimming Men-A",
+            "EventDate": "05-05-2017 13:05",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3580,
+            "EventName": "Fencing Men-C",
+            "EventDate": "05-05-2017 15:00",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3575,
+            "EventName": "LR  Men-A",
+            "EventDate": "05-05-2017 16:45",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3578,
+            "EventName": "LR Men-B",
+            "EventDate": "05-05-2017 17:45",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3581,
+            "EventName": "LR  Men-C",
+            "EventDate": "05-05-2017 18:45",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3571,
+            "EventName": "Women Final TM",
+            "EventDate": "05-05-2017 20:30",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3582,
+            "EventName": "Men Final -TM",
+            "EventDate": "05-05-2017 20:30",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3583,
+            "EventName": "Women Final- Swimming",
+            "EventDate": "06-05-2017 09:00",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3584,
+            "EventName": "Women Final- Fencing",
+            "EventDate": "06-05-2017 10:30",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3585,
+            "EventName": "Women Final- Riding",
+            "EventDate": "06-05-2017 15:30",
+            "AgeGroup": null,
+            "Type": "Riding",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3586,
+            "EventName": "Women Final- LR",
+            "EventDate": "06-05-2017 17:30",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3587,
+            "EventName": "Men Final- Swimming",
+            "EventDate": "07-05-2017 09:00",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3588,
+            "EventName": "Men Final- Fencing",
+            "EventDate": "07-05-2017 10:30",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3589,
+            "EventName": "Men Final- Riding",
+            "EventDate": "07-05-2017 15:30",
+            "AgeGroup": null,
+            "Type": "Riding",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3590,
+            "EventName": "Men Final- LR",
+            "EventDate": "07-05-2017 17:30",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "No"
+        },
+        {
+            "EventId": 3591,
+            "EventName": "Mix Relay -TM",
+            "EventDate": "07-05-2017 20:00",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "Yes"
+        },
+        {
+            "EventId": 3592,
+            "EventName": "Mix Relay Swimming",
+            "EventDate": "08-05-2017 09:00",
+            "AgeGroup": null,
+            "Type": "Swimming",
+            "Relay": "Yes"
+        },
+        {
+            "EventId": 3593,
+            "EventName": "Mix Relay Fencing",
+            "EventDate": "08-05-2017 10:15",
+            "AgeGroup": null,
+            "Type": "Fencing",
+            "Relay": "Yes"
+        },
+        {
+            "EventId": 3594,
+            "EventName": "Mix Relay Riding",
+            "EventDate": "08-05-2017 14:15",
+            "AgeGroup": null,
+            "Type": "Riding",
+            "Relay": "Yes"
+        },
+        {
+            "EventId": 3595,
+            "EventName": "Mix Relay LR",
+            "EventDate": "08-05-2017 16:15",
+            "AgeGroup": null,
+            "Type": "Combined (Running and Shooting)",
+            "Relay": "Yes"
+        }
+    ]
+}

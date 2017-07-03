@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>HTML Basic Example</title>
+        <script type="text/javascript" src="/common/js/qwebchannel.js"></script>
+        <script type="text/javascript" src="/common/js/servicehandler.js"></script>
+        <script type="text/javascript">
+            window.onload = function () {
+                // Initiate the server connection.
+                ServiceHandler.init();
+
+                // We should handle error conditions, such as network loss or something else unexpected.
+                ServiceHandler.onclose = function () {
+                    console.warn("ServiceHandler disconnected");
+                };
+
+                ServiceHandler.onerror = function(error) {
+                    console.error("ServiceHandler error", error);
+                };
+
+                // This is our callback when the server is connected and we're ready to access the APIs.
+                ServiceHandler.onready = function () {
+
+                    // The ServiceHandler's scheduler object is the one implementing the API, so we save a reference.
+                    window.scheduler = ServiceHandler.scheduler;
+
+                    // One the first things to do is to establish a callback for when one or more variable value changes. This is usefull to sync values between several browser windows, for example.
+                    // Normaly, only the values that actually changed are contained in the callback, however when first connecting the server, all variables' values will be sent over. This is to make sure the controls are populated with initial default values and ensures the values aren't lost when reloading the page, for example.
+                    scheduler.variablesChanged.connect(function (inputName, variables) {
+                        // Because there is a single server for all HTML inputs, this callback will be fired for any variable change and contain data we're not neccessary interested in, so we filter using the input name we set in the definition xml file.
+                        if (inputName == "HTML Basic Input Example") {
+                            console.debug("Variables changed", variables);
+
+                            // Check if the specific variable changed using its name from the input definition xml, then update the page control.
+                            if ("Home Score" in variables) {
+                                document.getElementById("homeScore").value = variables["Home Score"];
+                            }
+
+                            if ("Visitor Score" in variables) {
+                                document.getElementById("visitorScore").value = variables["Visitor Score"];
+                            }
+
+                            if ("Clock 1" in variables) {
+                                document.getElementById("clock").innerHTML = variables["Clock 1"];
+                            }
+                        }
+                    });
+
+                    // Update the home score variable when clicking the apply button.
+                    document.getElementById("setHomeScore").onclick = function() {
+                        var score = document.getElementById("homeScore").value;
+                        if (score == "") {
+                            score = 0;
+                        }
+
+                        // Update and schedule variables.
+                        // scheduleVariables(inputName, queuingMode, queueName, variables)
+                        // inputName - input bevavior name from the defintion xml
+                        // queuingMode - either "play"/"update"/"auto" or empty to use the default mode from defintion xml;
+                        //               "play" mode queues up titles with the new values and plays them back in turn after they finish rendering;
+                        //               "update" mode replaces the value of an existing title that may be playing already, or starts playback immediately otherwise;
+                        //               "auto" is either "play" or "update" based on project settings
+                        // queueName - arbitrary queue name; titles are placed in queues for playback, and only one title may be playing back at a time; use the input name for sufficiently unique queue name that doesn't clash with other titles
+                        // variables - dictionary of variable:value pairs; names must match the defintion xml 
+                    };
+
+                    // Update the visitor score variable when clicking the apply button.
+                    document.getElementById("setVisitorScore").onclick = function() {
+                        var score = document.getElementById("visitorScore").value;
+                        if (score == "") {
+                            score = 0;
+                        }
+
+                        // Update and schedule variables with additional options.
+                        scheduler.scheduleVariablesEx("play", 0, "HTML Basic Input Example", "", "update", "HTML Basic Input Example", "", "", "", { "Visitor Score": score });
+                    };
+
+                    // Update both the home and visitor score variable when clicking the apply button.
+                    // It is more efficient to batch updates together.
+                    document.getElementById("setScore").onclick = function () {
+                        var homeScore = document.getElementById("homeScore").value;
+                        if (homeScore == "") {
+                            homeScore = 0;
+                        }
+
+                        var visitorScore = document.getElementById("visitorScore").value;
+                        if (visitorScore == "") {
+                            visitorScore = 0;
+                        }
+
+                        scheduler.scheduleVariables("HTML Basic Input Example", "update", "HTML Basic Input Example", { "Home Score": homeScore, "Visitor Score": visitorScore });
+                    };
+
+                    // Start and countdown or countup clock when clicking the apply button.
+                    document.getElementById("setClock").onclick = function () {
+                        var clockBox = document.getElementById("clockBox");
+                        var countdownCheck = document.getElementById("clockCountdownCheck");
+
+                        // Create or update a clock variable. Once scheduled, a clock variable will continue updating its value in real-time.
+                        // variablesChanged callback will be fired for clock updates, albeit at a slower rate than the actual clock is ticking for efficiency.
+                        // scheduleClockVariable(inputName, queuingMode, queueName, variableName, command, format, time)
+                        // inputName - input bevavior name from the defintion xml
+                        // queuingMode - either "play" / "update" / "auto" or empty to use the default mode from defintion xml
+                        // queueName - arbitrary queue name; titles are placed in queues for playback, and only one title may be playing back at a time; use the input name for sufficiently unique queue name that doesn't clash with other titles
+                        // variableName - the clock variable name; name must match the defintion xml
+                        // command - either "countdown" / "countup" / "pause" / "resume";
+                        //           "countdown" starts a timer counting down; timer will stop once it reaches zero;
+                        //           "countup" starts a timer counting up;
+                        // format - time format string that affects how the value will be displayed;
+                        //     h - hours 0 to 23; hh to include leading zero
+                        //     H - total hours that can go above 23; HH to include leading zero
+                        //     m - minutes 0 to 59; mm to include leading zero
+                        //     M - total minutes that can go above 59; MM to include leading zero
+                        //     s - seconds 0 to 59; ss to include leading zero
+                        //     S - total seconds that can go above 59; SS to include leading zero
+                        //     z - tenths of second 0 to 9
+                        //     zz - hundredths of second 0 to 99
+                        //     zzz - milliseconds 0 to 999
+                        //     Z - total milliseconds that can go above 999; ZZZ to include leading zeros
+                        //     \ - escape the next character and treal it as literal
+                        //     '' - surround a string with single quotes so treat it as literal
+                        //     all other characters are treated as literal.
+                        //     Examples: "hh:mm:ss.zzz" -> "14:13:09.042"
+                        //               "'time-'MM:ss" -> "time-241:16"
+                        // time - for countdown and countup: time value in milliseconds or empty to use current system time
+                        //        for pause and resume: time value in milliseconds to set the clock to or empty to not adjust time
+                        scheduler.scheduleClockVariable("HTML Basic Input Example", "update", "HTML Basic Input Example", "Clock 1", countdownCheck.checked ? "countdown" : "countup", "MM:ss", parseInt(clockBox.value) * 1000);
+                    };
+
+                    console.info("ServiceHandler connected, ready to send/receive messages!");
+                };
+            }
+        </script>
+    </head>
+    <body>
+        <label>Home: <input type="text" id="homeScore" value="0" /><input type="submit" id="setHomeScore" value="Apply" /></label><br/>
+        <label>Visitor: <input type="text" id="visitorScore" value="0" /><input type="submit" id="setVisitorScore" value="Apply" /><input type="submit" id="setScore" value="Apply Both" onclick="click();" /></label><br />
+        Clock 1: <label><input type="text" id="clockBox" />seconds</label><label><input type="checkbox" id="clockCountdownCheck" />Countdown</label><input type="submit" id="setClock" value="Start Clock" onclick="click();" /><span id="clock"></span>
+    </body>
+</html>

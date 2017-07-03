@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "node-qwebchannel": "^1.0.0",
+    "qwebchannel": "^5.5.0",
     "socket.io": "^0.9.16",
-    "socket.io-client": "^0.9.16"
+    "socket.io-client": "^0.9.16",
+    "websocket": "^1.0.24"
   },
   "devDependencies": {},
   "scripts": {
